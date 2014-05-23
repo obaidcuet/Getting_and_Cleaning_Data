@@ -1,4 +1,4 @@
-# assuming that the file current working directory is in the directory 
+# assuming that the current working directory is in the directory 
 # which has been created after extracting "UCI HAR Dataset.zip" has been 
 
 #load the required library
