@@ -1,9 +1,8 @@
-# assuming that the file "UCI HAR Dataset.zip" has been 
-#extracted directly under the current working directory
+# assuming that the file current working directory is in the directory 
+# which has been created after extracting "UCI HAR Dataset.zip" has been 
 
 #load the required library
 library(data.table)
-
 
 # read features data
 features <- read.table("./features.txt")

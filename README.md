@@ -15,27 +15,33 @@ Data collected from the accelerometers from the Samsung Galaxy S smartphone whic
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 Note: Here files inside "Inertial Signals" folder have been ommited. These signals were used to estimate variables of the feature vectors for each pattern in X_train and X_test file.
 
-# output
+# Output
 The output of the script is a file name "tidy.data.txt" which covers all the conditions & steps mentioned in the "summary section".
 For detail description on the variables/columns of this file please refer to codebook for this dataset ("CodeBook.md")
 
 # How to Run?
 Please follow below steps to run this script:
+
 1. unzip the source data. It will create a forder under the current directory.
+
 2. change your current directory location inside the directory that was created while uncompresing the zip file in the avobe step.
+
 3. open rstudio/r-console and set working directory to the directory (as in step 2)
+
 4. copy the scrip(run_analysis.R)t to current location
+
 5. run the script as below:
    source("run_analysis.R")
+
 6. It will create a space(" ") seperated file "tidy.data.txt" with required tidy data under current working directory
 
-Example(on windows): 
+## Running "run_analysis.R", example(on windows): 
 - Let's say, the downloaded zip file name is "UCI HAR Dataset.zip" and it is kept under directory "c:\data\" 
 - After uncompress the zip directly on the current location(someting like using "Extract here"). It will create a folder "UCI HAR Dataset" under "c:\data\"
-- cd "UCI HAR Dataset". SO now current location is "c:\data\UCI HAR Dataset"
+- cd "UCI HAR Dataset".So, now current location is "c:\data\UCI HAR Dataset"
 - This directory("c:\data\UCI HAR Dataset") will have below components
-	- 2 directories : test & train
-	- 4 files: activity_labels.txt, features.txt, features_info.txt & README.txt
+	- Two directories : test & train
+	- Four files: activity_labels.txt, features.txt, features_info.txt & README.txt
 - Copy the script "run_analysis.R" to current directory("c:\data\UCI HAR Dataset") 
 - Open rstudio/r-console and set working directory to the "c:\data\UCI HAR Dataset"
 - Run the script using below command
@@ -50,56 +56,56 @@ Example(on windows):
 4. The script also have some codes to check all the column are filtered out properly. These will not be useful if we run the script as whole, but will be useful if anybody runs the script step by step.
 5. Then it uses a series of "gsub" commands to cleanup default features names and convers it to standard readable column names.
 Here it uses below considerations while renaming the features names:
-- Use only lower case
-- Although having dot "." in variable names is not encouraged some standards, we are using dot ".". Because these features names are very complex and combination to many components(like time, gyroscope etc..). Using dots makes it easy to seperate each of the components in the column names.
-- Other that dot no other symbols are used here
-- It used regular expressions with "perl = TRUE" in "gsub" for search and replace.
-Below is the list of filters that are used, first string before comma is the search string and second string after comma is the replace string: 
-	"^f","frequency"
-	"^t","time"
-	"Acc",".accelerometer"
-	"Gravity",".gravity"
-	"BodyBody",".body" 
-	"Body",".body"
-	"Jerk",".jerk"
-	"Mag",".magnitude"
-	"Gyro",".gyroscope"
-	"-mean\\(\\)",".mean"
-	"-std\\(\\)",".standard.deviation"
-	"-X",".x.axis"
-	"-Y",".y.axis"
-	"-Z",".z.axis"
+	- Use only lower case
+	- Although having dot "." in variable names is not encouraged some standards, we are using dot ".". Because these features names are very complex and combination to many components(like time, gyroscope etc..). Using dots makes it easy to seperate each of the components in the column names.
+	- Other that dot no other symbols are used here
+	- It used regular expressions with "perl = TRUE" in "gsub" for search and replace.
+	Below is the list of filters that are used, first string before comma is the search string and second string after comma is the replace string: 
+		- "^f","frequency"
+		- "^t","time"
+		- "Acc",".accelerometer"
+		- "Gravity",".gravity"
+		- "BodyBody",".body" 
+		- "Body",".body"
+		- "Jerk",".jerk"
+		- "Mag",".magnitude"
+		- "Gyro",".gyroscope"
+		- "-mean\\(\\)",".mean"
+		- "-std\\(\\)",".standard.deviation"
+		- "-X",".x.axis"
+		- "-Y",".y.axis"
+		- "-Z",".z.axis"
 
 6. After celaning columns name we it stored final column names in vector "columnLabelsClean"
 
 7. Append  "subject" & "activity" column names in sequence in the final columns (in vector "columnLabelsClean"). As these columns will be added at the end of the merged data set in the following spets.
 
-8. Train Data: Read train data file "X_train.txt" and store in data frame "trainData"
+8. Read train data file "X_train.txt" and store in data frame "trainData"
 
-9. Train Data: Use "columnLabelsIdx"(step 2) to find out the required columns and in "trainData" keep only required columns
+9. Use "columnLabelsIdx"(step 2) to find out the required columns and in "trainData" keep only required columns
 
-10. Train Data: Read read related subject data from file subject_train.txt and store in data frame "trainSubject"
+10. Read read related subject data from file subject_train.txt and store in data frame "trainSubject"
 
-11. Train Data: Read read related activity data from file y_train.txt and store in data frame "trainActivity"
+11. Read read related activity data from file y_train.txt and store in data frame "trainActivity"
 
-12 Train Data: Append related train subject("trainSubject") & train activity("trainActivity") data in the main train data set ("trainData").
+12. Append related train subject("trainSubject") & train activity("trainActivity") data in the main train data set ("trainData").
 Add subject followed by activity in sequence as we have prepared column names in this sequence(step 7)
  
-13. Train Data: Now train data frame having complete data set for tarin with subject & activity. 
+13. Now train data frame having complete data set for tarin with subject & activity. 
 Now update column names in main train data frame("trainData") using character vector "columnLabelsClean" (step 7)
 
-14. Test Data: Read test data file "X_test.txt" and store in data frame "testData"
+14. Read test data file "X_test.txt" and store in data frame "testData"
 
-15. Test Data: Use "columnLabelsIdx"(step 2) to find out the required columns and in "testData" keep only required columns
+15. Use "columnLabelsIdx"(step 2) to find out the required columns and in "testData" keep only required columns
 
-16. Test Data: Read read related subject data from file subject_test.txt and store in data frame "testSubject"
+16. Read read related subject data from file subject_test.txt and store in data frame "testSubject"
 
-17. Test Data: Read read related activity data from file y_test.txt and store in data frame "testActivity"
+17. Read read related activity data from file y_test.txt and store in data frame "testActivity"
 
-18 Test Data: Append related test subject("testSubject") & test activity("testActivity") data in the main test data set ("testData").
+18. Append related test subject("testSubject") & test activity("testActivity") data in the main test data set ("testData").
 Add subject followed by activity in sequence as we have prepared column names in this sequence(step 7)
  
-19. Test Data: Now train data frame having complete data set for test with subject & activity. 
+19. Now train data frame having complete data set for test with subject & activity. 
 Now update column names in main test data frame("testData") using character vector "columnLabelsClean" (step 7)
 
 20. Combine train & test data frames to create a single data frame having both train and test data together and store it in data frame "trainAndTestData". Here the script used rbind to combin all the rows of both data frames.
@@ -121,7 +127,3 @@ Use "lapply" function over "trainAndTestData" calculating mean by column "subjec
 27. Process in previous step(step 26) will place the "activity" & "subject" columns at the beginning in data farme "tidyData", but the column names will be different. So, rename those respective columns names to "activity" & "subject".
 
 28. Now data frame "tidyData" having required tidy data. Write the tidy data ("tidyData") to file using "write.table" usining space (" ") seperator and exculding row names.
-
-
-
-
