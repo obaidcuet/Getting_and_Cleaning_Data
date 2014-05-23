@@ -35,7 +35,7 @@ Please follow below steps to run this script:
 
 6. It will create a space(" ") seperated file "tidy.data.txt" with required tidy data under current working directory
 
-## Running "run_analysis.R", example(on windows): 
+## Running "run_analysis.R", example(on windows) 
 - Let's say, the downloaded zip file name is "UCI HAR Dataset.zip" and it is kept under directory "c:\data\" 
 - After uncompress the zip directly on the current location(someting like using "Extract here"). It will create a folder "UCI HAR Dataset" under "c:\data\"
 - cd "UCI HAR Dataset".So, now current location is "c:\data\UCI HAR Dataset"

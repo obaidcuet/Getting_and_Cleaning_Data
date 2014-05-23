@@ -11,9 +11,11 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 * Appropriately labels the data set with descriptive activity names. 
 * Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-First two columns of this data set containg "activity" & "subject" and rest of the colums contains "mean" for the corresponding measurements denoded the the column name.
+This dataset has total 68 columns and 180 rows. Apart from that it also has column headings.
+First two columns of this data set is "activity" & "subject". Rest of the colums contain "mean" of the corresponding measurements denoded by the column name for corresponding "activity" & "subject" in the 1st two columns.
+ 
 
-# Decsription of each columns in the tidy dataset ""tidy.data.txt"
+# Decsription of each columns in the tidy dataset "tidy.data.txt"
 [1] "activity"    
 - Data Type: character
 - Activity done by the subject during the original experiment.
